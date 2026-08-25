@@ -227,7 +227,7 @@ a { color: inherit; text-decoration: none; }
 }
 .intro-copy .btn { margin-top: 6px; }
 .intro-img {
-  width: 100%;
+  width: 85%;
   max-width: 480px;
   margin: 0 auto;
   display: block;
