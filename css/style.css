@@ -146,10 +146,8 @@ a { color: inherit; text-decoration: none; }
   padding-top: 14px;
   padding-bottom: 14px;
 }
-.logo { display: flex; align-items: center; gap: 8px; }
-.logo-flower { color: var(--color-teal); font-size: 1.3rem; }
-.logo-text { font-family: var(--font-display); font-size: 1.3rem; color: var(--color-teal-deep); }
-.logo-text em { font-style: italic; font-weight: 300; color: var(--color-teal); }
+.logo { display: flex; align-items: center; }
+.logo-img { height: 40px; width: auto; display: block; }
 
 .nav { display: flex; align-items: center; gap: 28px; }
 .nav a { font-size: .92rem; font-weight: 500; color: var(--color-teal-deep); }
