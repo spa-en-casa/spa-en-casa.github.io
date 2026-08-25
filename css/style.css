@@ -1,8 +1,5 @@
 /* =====================================================
-   SPA EN CASA — design tokens
-   Cambia --font-display / --font-body por el nombre exacto
-   de tus fuentes de Adobe Fonts una vez agregues el <link>
-   en el <head> de index.html.
+Diseño css
    ===================================================== */
 :root {
   --color-cream: #FBF7F0;
