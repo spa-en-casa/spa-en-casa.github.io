@@ -97,14 +97,18 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   aspect-ratio: 4 / 3;
   border-radius: var(--radius);
-  background:
+  background-color: var(--color-sand);
+  background-image:
     repeating-linear-gradient(135deg, var(--color-teal-pale), var(--color-teal-pale) 12px, var(--color-sand) 12px, var(--color-sand) 24px);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
   box-shadow: var(--shadow-soft);
 }
-.img-placeholder::after {
+.img-placeholder[data-label]::after {
   content: attr(data-label);
   display: block;
   width: 100%;
@@ -178,8 +182,14 @@ a { color: inherit; text-decoration: none; }
   box-shadow: none;
   display: block;
   overflow: hidden;
+  background-color: var(--color-sand);
+  background-image:
+    repeating-linear-gradient(135deg, var(--color-teal-pale), var(--color-teal-pale) 12px, var(--color-sand) 12px, var(--color-sand) 24px);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-.hero-media::after {
+.hero-media[data-label]::after {
   /* keep the "replace this image" label, but small and tucked in a corner */
   content: attr(data-label);
   position: absolute;
