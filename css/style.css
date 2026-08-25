@@ -226,6 +226,13 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
 }
 .intro-copy .btn { margin-top: 6px; }
+.intro-img {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
 
 /* ===================== SERVICIOS ===================== */
 .servicios { padding: 60px 0; background: var(--color-cream); border-top: 2px solid var(--color-line); }
