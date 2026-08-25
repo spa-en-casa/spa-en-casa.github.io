@@ -1,6 +1,6 @@
 # Spa en Casa — landing page
 
-Página responsive (celular + PC) lista para GitHub Pages.
+Página (celular + PC) para GitHub Pages.
 
 ## Página Spa en Casa
 ```
