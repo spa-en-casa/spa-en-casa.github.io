@@ -232,7 +232,6 @@ a { color: inherit; text-decoration: none; }
   margin: 0 auto;
   display: block;
   border: 2px solid var(--color-line);
-  border-radius: var(--radius);
   box-shadow: var(--shadow-soft);
   aspect-ratio: 4 / 5;
   object-fit: cover;
