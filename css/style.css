@@ -41,8 +41,20 @@ h1, h2, h3 {
   margin: 0 0 .5em;
 }
 h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); }
-h2 { font-size: clamp(1.9rem, 4.2vw, 2.7rem); font-weight: 600; }
-h3 { font-size: 1.4rem; margin-bottom: .3em; }
+h2 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 500; }
+h3 { font-size: clamp(1.3rem, 2.4vw, 1.6rem); font-weight: 700; margin-bottom: .3em; }
+
+/* Los h2 largos tipo "Entérate de nuestros servicios..." funcionan como
+   texto de apoyo, no como título corto: se ven más como contenido, así
+   que quedan más ligeros que un título real (footer, intro). */
+.servicios h2.center,
+.videos h2.center,
+.galeria h2.center,
+.resenas h2.center {
+  font-weight: 500;
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  color: var(--color-teal);
+}
 
 p { line-height: 1.65; margin: 0 0 1em; }
 
