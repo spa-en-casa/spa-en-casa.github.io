@@ -47,10 +47,10 @@ h3 { font-size: clamp(1.3rem, 2.4vw, 1.6rem); font-weight: 700; margin-bottom: .
 /* Los h2 largos tipo "Entérate de nuestros servicios..." funcionan como
    texto de apoyo, no como título corto: se ven más como contenido, así
    que quedan más ligeros que un título real (footer, intro). */
-.servicios h2.center,
-.videos h2.center,
-.galeria h2.center,
-.resenas h2.center {
+.servicios .content-center,
+.videos .content-center,
+.galeria .content-center,
+.resenas .content-center {
   font-weight: 500;
   font-size: clamp(1.3rem, 2.4vw, 1.7rem);
   color: var(--color-teal);
@@ -66,7 +66,7 @@ a { color: inherit; text-decoration: none; }
   padding: 0 24px;
 }
 
-.center { text-align: center; }
+.center { text-align: center; } /* utilidad genérica de sobra, ya no la usan los títulos/contenidos/botones de abajo */
 .eyebrow {
   font-family: var(--font-body);
   text-transform: uppercase;
@@ -76,7 +76,15 @@ a { color: inherit; text-decoration: none; }
   font-weight: 600;
   margin-bottom: .6em;
 }
-.eyebrow.center { text-align: center; }
+
+/* Tres clases separadas (antes todas compartían .center):
+   - .title-center  -> va sobre el "eyebrow" (la etiqueta pequeña del título)
+   - .content-center -> va sobre el h2 largo tipo párrafo que sigue al título
+   - .actions-center -> va sobre el div que envuelve un botón "Ver más..."
+   Las tres solo centran texto, igual que antes; tocar una ya no afecta a las otras. */
+.title-center { text-align: center; }
+.content-center { text-align: center; }
+.actions-center { text-align: center; }
 
 /* ---------- buttons ---------- */
 .btn {
@@ -271,7 +279,7 @@ a { color: inherit; text-decoration: none; }
 }
 /* ===================== SERVICIOS ===================== */
 .servicios { padding: 60px 0; background: var(--color-teal-pale); border-top: 2px solid var(--color-line); }
-.servicios h2.center { max-width: 640px; margin-left: auto; margin-right: auto; margin-bottom: 40px; }
+.servicios .content-center { max-width: 640px; margin-left: auto; margin-right: auto; margin-bottom: 40px; }
 
 .servicios-grid {
   display: grid;
@@ -319,7 +327,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ===================== VIDEOS ===================== */
 .videos { padding: 60px 0; border-top: 2px solid var(--color-line); background: var(--color-cream); }
-.videos h2.center { max-width: 680px; margin: 0 auto 36px; }
+.videos .content-center { max-width: 680px; margin: 0 auto 36px; }
 .video-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -395,7 +403,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ===================== GALERÍA ===================== */
 .galeria { padding: 60px 0; background: var(--color-teal-pale); border-top: 2px solid var(--color-line); }
-.galeria h2.center { max-width: 680px; margin: 0 auto 36px; }
+.galeria .content-center { max-width: 680px; margin: 0 auto 36px; }
 .gallery-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -405,7 +413,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ===================== RESEÑAS ===================== */
 .resenas { padding: 60px 0; border-top: 2px solid var(--color-line); background: var(--color-cream); }
-.resenas h2.center { max-width: 680px; margin: 0 auto 36px; }
+.resenas .content-center { max-width: 680px; margin: 0 auto 36px; }
 .review-grid {
   display: grid;
   grid-template-columns: 1fr;
