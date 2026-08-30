@@ -60,3 +60,18 @@ modal.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeVideo();
 });
+
+// ---------- Ver más videos ----------
+// Al hacer clic, muestra todas las tarjetas marcadas con .video-hidden
+// (ya tienen su miniatura y su listener del modal puestos arriba, aunque
+// estuvieran ocultas con display:none, así que no hace falta nada más).
+const verMasVideosBtn = document.getElementById('verMasVideosBtn');
+if (verMasVideosBtn) {
+  verMasVideosBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelectorAll('.video-card.video-hidden').forEach(card => {
+      card.classList.remove('video-hidden');
+    });
+    verMasVideosBtn.remove(); // ya se mostraron todas, el botón sobra
+  });
+}
