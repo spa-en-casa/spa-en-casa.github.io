@@ -34,10 +34,23 @@ const modalFrame = document.getElementById('videoModalFrame');
 const modalClose = document.getElementById('videoModalClose');
 
 function openVideo(youtubeId) {
+  modalFrame.classList.remove('vertical'); // YouTube: caja horizontal 16:9
   modalFrame.innerHTML = `<iframe
       src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0"
       title="Video de Spa en Casa"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>`;
+  modal.classList.add('open');
+}
+
+// Los Reels de Instagram son verticales, así que usan su propio marco
+// (ver clase .vertical en el CSS) en vez de la caja 16:9 de YouTube.
+function openInstagram(reelId) {
+  modalFrame.classList.add('vertical');
+  modalFrame.innerHTML = `<iframe
+      src="https://www.instagram.com/reel/${reelId}/embed"
+      title="Video de Spa en Casa (Instagram)"
+      allow="autoplay; encrypted-media; picture-in-picture"
       allowfullscreen></iframe>`;
   modal.classList.add('open');
 }
@@ -49,7 +62,11 @@ function closeVideo() {
 
 document.querySelectorAll('.video-card').forEach(card => {
   card.querySelector('.video-thumb').addEventListener('click', () => {
-    openVideo(card.dataset.youtubeId);
+    if (card.dataset.provider === 'instagram') {
+      openInstagram(card.dataset.instagramId);
+    } else {
+      openVideo(card.dataset.youtubeId);
+    }
   });
 });
 
