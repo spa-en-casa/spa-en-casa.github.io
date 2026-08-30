@@ -137,6 +137,11 @@ a { color: inherit; text-decoration: none; }
   color: var(--color-teal-deep);
   background: rgba(255,255,255,.75);
 }
+/* En cuanto la foto real carga bien (ver onload en el <img>), se le agrega
+   esta clase al contenedor y la etiqueta de ayuda desaparece, para que no
+   se asome en el huequito que deja el "contain" cuando la proporción de la
+   foto no calza exacto con la caja. */
+.img-placeholder.has-real-img[data-label]::after { display: none; }
 .img-placeholder.small { aspect-ratio: 4/3; }
 .gallery-caption {
   position: absolute;
