@@ -297,3 +297,15 @@ if (verMasImagenesBtn) {
     verMasImagenesBtn.remove();
   });
 }
+
+// ---------- Ver más comentarios ----------
+const verMasComentariosBtn = document.getElementById('verMasComentariosBtn');
+if (verMasComentariosBtn) {
+  verMasComentariosBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelectorAll('.review-card.review-hidden').forEach(card => {
+      card.classList.remove('review-hidden');
+    });
+    verMasComentariosBtn.remove();
+  });
+}
