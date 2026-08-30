@@ -172,25 +172,63 @@ lightboxStage.addEventListener('wheel', (e) => {
   applyTransform();
 }, { passive: false });
 
-// Doble clic para restaurar el zoom fácil (PC)
+// Doble clic también restaura el zoom, por si acaso (queda como respaldo)
 lightboxImg.addEventListener('dblclick', resetZoom);
 
-// Arrastrar la imagen ampliada (PC)
+const ZOOM_CLICK_SCALE = 2.2;   // a cuánto zoom salta al hacer click
+const DRAG_THRESHOLD = 5;       // px de movimiento para que cuente como arrastre y no como click
+
+let mouseDownX = 0, mouseDownY = 0, hasMoved = false;
+
+// Click para hacer/quitar zoom, centrado en el punto donde clickeaste
+function toggleClickZoom(clientX, clientY) {
+  const rect = lightboxStage.getBoundingClientRect();
+  const ox = clientX - (rect.left + rect.width / 2);
+  const oy = clientY - (rect.top + rect.height / 2);
+
+  if (scale === 1) {
+    const newScale = ZOOM_CLICK_SCALE;
+    translateX = ox - (newScale / scale) * (ox - translateX);
+    translateY = oy - (newScale / scale) * (oy - translateY);
+    scale = newScale;
+  } else {
+    scale = 1; translateX = 0; translateY = 0;
+  }
+  applyTransform();
+}
+
 lightboxImg.addEventListener('mousedown', (e) => {
-  if (scale === 1) return;
+  e.preventDefault(); // evita que el navegador intente "arrastrar" la imagen como archivo
+  mouseDownX = e.clientX;
+  mouseDownY = e.clientY;
+  hasMoved = false;
   isDragging = true;
   dragStartX = e.clientX - translateX;
   dragStartY = e.clientY - translateY;
-  lightboxImg.classList.add('dragging');
 });
+
 window.addEventListener('mousemove', (e) => {
   if (!isDragging) return;
-  translateX = e.clientX - dragStartX;
-  translateY = e.clientY - dragStartY;
-  applyTransform();
+  const movedDist = Math.hypot(e.clientX - mouseDownX, e.clientY - mouseDownY);
+  if (movedDist > DRAG_THRESHOLD) {
+    hasMoved = true;
+    lightboxImg.classList.add('dragging');
+  }
+  // Solo mueve la imagen si ya se confirmó que es un arrastre (no un click) y hay zoom aplicado
+  if (hasMoved && scale > 1) {
+    translateX = e.clientX - dragStartX;
+    translateY = e.clientY - dragStartY;
+    applyTransform();
+  }
 });
-window.addEventListener('mouseup', () => {
+
+window.addEventListener('mouseup', (e) => {
+  if (isDragging && !hasMoved) {
+    // Soltaste casi en el mismo punto: fue un click, no un arrastre → alterna el zoom
+    toggleClickZoom(e.clientX, e.clientY);
+  }
   isDragging = false;
+  hasMoved = false;
   lightboxImg.classList.remove('dragging');
 });
 
