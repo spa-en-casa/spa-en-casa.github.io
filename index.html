@@ -163,7 +163,7 @@
     <div class="cta-block">
       <img class="cta-decor cta-decor-left" src="images/contactanos-1.webp" alt="" aria-hidden="true" loading="lazy">
       <p>¿Buscando otro tratamiento? Contáctanos.</p>
-      <a href="#contacto" class="btn btn-primary">Contáctanos aquí</a>
+      <a href="https://wa.me/14708969911?text=Hola%2C%20quiero%20consultar%20sobre%20otro%20tratamiento%2Fservicio" class="btn btn-primary" target="_blank" rel="noopener">Contáctanos aquí</a>
       <img class="cta-decor cta-decor-right" src="images/contactanos-2.webp" alt="" aria-hidden="true" loading="lazy">
       <img class="cta-decor-mobile" src="images/contactanos-3.webp" alt="" aria-hidden="true" loading="lazy">
     </div>
@@ -419,17 +419,45 @@
   <div class="container footer-inner">
     <div class="footer-info">
       <h2>Contacto y ubicación</h2>
-      <p><span aria-hidden="true">📍</span> 559 N Fairfield Dr, Peachtree City</p>
-      <p><span aria-hidden="true">📞</span> <a href="tel:+14708969911">+1 (470) 896-9911</a></p>
+
+      <div class="footer-contact-item">
+        <svg class="footer-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <circle cx="12" cy="9.5" r="2.4" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <p><a href="https://www.google.com/maps?q=559+N+Fairfield+Dr,+Peachtree+City,+GA" target="_blank" rel="noopener">559 N Fairfield Dr, Peachtree City</a></p>
+      </div>
+
+      <div class="footer-contact-item">
+        <svg class="footer-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1v3.4c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1L6.6 10.8z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+        <p><a href="tel:+14708969911">+1 (470) 896-9911</a></p>
+      </div>
+
+      <a class="whatsapp-btn" href="https://wa.me/14708969911?text=Hola%2C%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios." target="_blank" rel="noopener">
+        <svg class="whatsapp-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path fill="#fff" d="M16.004 3C9.377 3 4 8.373 4 15c0 2.34.66 4.523 1.8 6.383L4 29l7.8-1.77A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm6.99 16.66c-.29.82-1.45 1.5-2.37 1.7-.63.13-1.45.24-4.22-.9-3.54-1.46-5.82-5.03-6-5.27-.18-.24-1.44-1.92-1.44-3.66 0-1.74.9-2.6 1.22-2.96.32-.36.7-.45.93-.45.23 0 .47 0 .67.01.22.01.5-.08.78.6.29.7.97 2.42 1.06 2.6.09.18.15.39.03.63-.12.24-.18.39-.36.6-.18.21-.38.47-.54.63-.18.18-.37.37-.16.73.21.36.94 1.56 2.02 2.53 1.39 1.24 2.56 1.62 2.92 1.8.36.18.57.15.78-.09.21-.24.9-1.05 1.14-1.41.24-.36.48-.3.8-.18.32.12 2.04.96 2.39 1.14.35.18.58.27.66.42.09.15.09.86-.2 1.68z"/>
+        </svg>
+        Escríbenos por WhatsApp
+      </a>
+
       <p class="footer-name">Yoselin Chourio</p>
       <p class="footer-role">Cosmetóloga</p>
+
+      <div class="footer-logo">
+        <img src="images/Logo.webp" alt="Spa en Casa" class="footer-logo-img">
+      </div>
     </div>
 
     <div class="footer-map">
-      <!-- Opción A: foto estática del mapa (sube images/mapa.webp) -->
-      <!-- Opción B (recomendada): pega aquí un <iframe> de "Compartir" > "Insertar un mapa" de Google Maps -->
-      <div class="img-placeholder" data-label="images/mapa.webp">
-        <img class="real-img" src="images/mapa.webp" alt="Mapa de ubicación de Spa en Casa" loading="lazy" onload="this.closest('.img-placeholder').classList.add('has-real-img')" onerror="this.remove()">
+      <div class="map-embed">
+        <iframe
+          src="https://www.google.com/maps?q=559+N+Fairfield+Dr,+Peachtree+City,+GA&output=embed"
+          title="Ubicación de Spa en Casa"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
       </div>
     </div>
   </div>
