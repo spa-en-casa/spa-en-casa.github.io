@@ -554,6 +554,7 @@ a { color: inherit; text-decoration: none; }
 }
 .review-card-photo { padding: 0; overflow: hidden; }
 .review-card-photo .img-placeholder { border-radius: var(--radius); box-shadow: none; }
+.review-card.review-hidden { display: none !important; }
 .review-photo-caption {
   margin: 0;
   padding: 12px 16px;
