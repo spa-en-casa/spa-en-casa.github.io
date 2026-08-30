@@ -285,3 +285,15 @@ lightboxStage.addEventListener('touchend', (e) => {
     swipeStartX = null;
   }
 });
+
+// ---------- Ver más imágenes (mobile: muestra 4, el resto al hacer clic) ----------
+const verMasImagenesBtn = document.getElementById('verMasImagenesBtn');
+if (verMasImagenesBtn) {
+  verMasImagenesBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelectorAll('.gallery-grid .gallery-hidden').forEach(item => {
+      item.classList.remove('gallery-hidden');
+    });
+    verMasImagenesBtn.remove();
+  });
+}
