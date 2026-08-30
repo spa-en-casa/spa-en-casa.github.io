@@ -9,6 +9,7 @@
   --color-teal: #5B9E8F;
   --color-teal-light: #A9D2C4;
   --color-teal-pale: #E4EFEA;
+  --color-fill: #BADED6;
   --color-blush: #E8B7AC;
   --color-text: #263430;
   --color-text-soft: rgba(38, 52, 48, 0.72);
@@ -120,12 +121,7 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   aspect-ratio: 4 / 3;
   border-radius: var(--radius);
-  background-color: var(--color-sand);
-  background-image:
-    repeating-linear-gradient(135deg, var(--color-teal-pale), var(--color-teal-pale) 12px, var(--color-sand) 12px, var(--color-sand) 24px);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: var(--color-fill);
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -154,16 +150,17 @@ a { color: inherit; text-decoration: none; }
   z-index: 2;
 }
 
-/* Real photo dropped into a placeholder: fills the box and sits above the
-   striped pattern + filename hint. If the file at `src` is missing, the
-   inline onerror handler on the <img> removes it and the striped
-   placeholder + filename hint show again automatically. */
+/* Real photo dropped into a placeholder: shown in full (no cropping) with
+   any leftover space filled by --color-fill (#BADED6), so photos with a
+   different aspect ratio than the box don't look cropped or leave odd gaps.
+   If the file at `src` is missing, the inline onerror handler on the <img>
+   removes it and the fill color + filename hint show again automatically. */
 .img-placeholder .real-img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   z-index: 1;
 }
 
