@@ -92,3 +92,158 @@ if (verMasVideosBtn) {
     verMasVideosBtn.remove(); // ya se mostraron todas, el botón sobra
   });
 }
+// ---------- Lightbox de Galería: zoom + navegación ----------
+const galleryItems = Array.from(document.querySelectorAll('.gallery-grid .img-placeholder'));
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxClose = document.getElementById('lightboxClose');
+const lightboxPrev = document.getElementById('lightboxPrev');
+const lightboxNext = document.getElementById('lightboxNext');
+const lightboxStage = document.getElementById('lightboxStage');
+
+let currentIndex = 0;
+let scale = 1, translateX = 0, translateY = 0;
+let isDragging = false, dragStartX = 0, dragStartY = 0;
+let lastTouchDist = null;
+let lastTapTime = 0;
+let swipeStartX = null;
+
+// Solo cuenta las fotos que sí cargaron (las que fallan se autoeliminan con onerror)
+function getGalleryImages() {
+  return galleryItems.map(item => item.querySelector('.real-img')).filter(img => img);
+}
+
+function applyTransform() {
+  lightboxImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+  lightboxImg.style.cursor = scale > 1 ? 'grab' : 'zoom-in';
+}
+
+function resetZoom() {
+  scale = 1; translateX = 0; translateY = 0;
+  applyTransform();
+}
+
+function showImage(index) {
+  const imgs = getGalleryImages();
+  if (!imgs.length) return;
+  currentIndex = (index + imgs.length) % imgs.length;
+  lightboxImg.src = imgs[currentIndex].src;
+  lightboxImg.alt = imgs[currentIndex].alt || '';
+  resetZoom();
+}
+
+function openLightbox(index) {
+  showImage(index);
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  lightboxImg.src = '';
+  document.body.style.overflow = '';
+}
+
+function nextImage() { showImage(currentIndex + 1); }
+function prevImage() { showImage(currentIndex - 1); }
+
+galleryItems.forEach((item, i) => {
+  item.addEventListener('click', () => openLightbox(i));
+});
+
+lightboxClose.addEventListener('click', closeLightbox);
+lightboxNext.addEventListener('click', nextImage);
+lightboxPrev.addEventListener('click', prevImage);
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') nextImage();
+  if (e.key === 'ArrowLeft') prevImage();
+});
+
+// Zoom con la rueda del mouse (PC)
+lightboxStage.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const delta = e.deltaY < 0 ? 0.15 : -0.15;
+  scale = Math.min(4, Math.max(1, scale + delta));
+  if (scale === 1) { translateX = 0; translateY = 0; }
+  applyTransform();
+}, { passive: false });
+
+// Doble clic para restaurar el zoom fácil (PC)
+lightboxImg.addEventListener('dblclick', resetZoom);
+
+// Arrastrar la imagen ampliada (PC)
+lightboxImg.addEventListener('mousedown', (e) => {
+  if (scale === 1) return;
+  isDragging = true;
+  dragStartX = e.clientX - translateX;
+  dragStartY = e.clientY - translateY;
+  lightboxImg.classList.add('dragging');
+});
+window.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  translateX = e.clientX - dragStartX;
+  translateY = e.clientY - dragStartY;
+  applyTransform();
+});
+window.addEventListener('mouseup', () => {
+  isDragging = false;
+  lightboxImg.classList.remove('dragging');
+});
+
+// ---------- Gestos táctiles (celular) ----------
+function touchDistance(touches) {
+  const dx = touches[0].clientX - touches[1].clientX;
+  const dy = touches[0].clientY - touches[1].clientY;
+  return Math.hypot(dx, dy);
+}
+
+lightboxStage.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 2) {
+    lastTouchDist = touchDistance(e.touches);
+  } else if (e.touches.length === 1) {
+    const now = Date.now();
+    if (now - lastTapTime < 300) resetZoom(); // doble toque = restaurar
+    lastTapTime = now;
+
+    if (scale > 1) {
+      isDragging = true;
+      dragStartX = e.touches[0].clientX - translateX;
+      dragStartY = e.touches[0].clientY - translateY;
+    } else {
+      swipeStartX = e.touches[0].clientX; // para deslizar entre fotos
+    }
+  }
+}, { passive: true });
+
+lightboxStage.addEventListener('touchmove', (e) => {
+  if (e.touches.length === 2 && lastTouchDist !== null) {
+    e.preventDefault();
+    const newDist = touchDistance(e.touches);
+    const delta = (newDist - lastTouchDist) * 0.01;
+    scale = Math.min(4, Math.max(1, scale + delta));
+    if (scale === 1) { translateX = 0; translateY = 0; }
+    applyTransform();
+    lastTouchDist = newDist;
+  } else if (e.touches.length === 1 && isDragging) {
+    e.preventDefault();
+    translateX = e.touches[0].clientX - dragStartX;
+    translateY = e.touches[0].clientY - dragStartY;
+    applyTransform();
+  }
+}, { passive: false });
+
+lightboxStage.addEventListener('touchend', (e) => {
+  if (e.touches.length < 2) lastTouchDist = null;
+  if (e.touches.length === 0) {
+    isDragging = false;
+    if (scale === 1 && swipeStartX !== null && e.changedTouches.length) {
+      const deltaX = e.changedTouches[0].clientX - swipeStartX;
+      if (Math.abs(deltaX) > 50) (deltaX > 0 ? prevImage() : nextImage());
+    }
+    swipeStartX = null;
+  }
+});
