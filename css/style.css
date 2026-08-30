@@ -367,6 +367,19 @@ a { color: inherit; text-decoration: none; }
 .cta-decor-left { left: 18px; }
 .cta-decor-right { right: 18px; }
 
+/* En mobile no hay espacio a los costados, así que en vez de las dos
+   piezas de .cta-decor se usa una sola imagen (la flor completa),
+   centrada debajo del botón. Se oculta desde 860px porque ahí ya
+   aparecen las dos piezas laterales en su lugar. */
+.cta-decor-mobile {
+  display: block;
+  width: 150px;
+  height: auto;
+  margin: 18px auto 0;
+  position: relative;
+  z-index: 1;
+}
+
 /* ===================== VIDEOS ===================== */
 .videos { padding: 60px 0; border-top: 2px solid var(--color-line); background: var(--color-cream); }
 .videos .content-center { max-width: 680px; margin: 0 auto 36px; }
@@ -522,6 +535,7 @@ a { color: inherit; text-decoration: none; }
 
   .cta-block { padding: 36px 130px; }
   .cta-decor { display: block; }
+  .cta-decor-mobile { display: none; }
 
   .video-grid { grid-template-columns: repeat(2, 1fr); }
 
